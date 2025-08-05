@@ -38,7 +38,7 @@ def calculate_dls_target(
     else:
         return "Unsupported match type. Only 20, 50 overs or 100-ball matches are supported."
     if balls_elapsed_2nd < min_balls_required:
-        return f"DLS cannot be applied. At least {min_balls_required} balls must be bowled in the 2nd innings of a {match_type} match."
+        return f"DLS method cannot be applied. At least {min_balls_required} balls must be bowled in the 2nd innings of a {match_type} match."
     overs_first = total_balls / 6
     overs_elapsed_2nd = balls_elapsed_2nd / 6
     overs_reduced_2nd = reduced_balls_2nd / 6
@@ -46,16 +46,16 @@ def calculate_dls_target(
     res1 = get_resource(overs_first, 0)
     res2 = get_resource(overs_left_2nd, wickets_lost_2nd)
     print(f"Match Type: {match_type}")
-    print(f"Resource 1st innings: {res1}%")
-    print(f"Resource 2nd innings: {res2}%")
+    print(f"Resource - 1st innings: {res1}%")
+    print(f"Resource - 2nd innings: {res2}%")
     par_score = int(team1_score * res2 / res1)
-    return f"DLS Target for Team 2: {par_score + 1} runs"
+    return f"DLS Target for Team 2: {par_score + 1}"
 if __name__ == "__main__":
     match_format = int(input("Enter match format (20 for T20(I), 50 for ODI, 100 for The Hundred): "))
     team1_score = int(input("Enter 1st innings team total: "))
     balls_elapsed = int(input("Enter balls elapsed in 2nd innings: "))
     wickets_lost = int(input("Enter number of wickets lost in 2nd innings: "))
-    reduced_balls = int(input("Enter reduced number of balls of 2nd innings: "))
+    reduced_balls = int(input("Enter reduced number of balls in 2nd innings: "))
     result = calculate_dls_target(
         match_format, team1_score, balls_elapsed, wickets_lost, reduced_balls
     )
